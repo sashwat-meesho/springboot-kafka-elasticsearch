@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## Few Additional Files ##
+
+# Sensitive files
+application.properties
+application.yml
+.env
+
+# Databases, logs
+*.db
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
