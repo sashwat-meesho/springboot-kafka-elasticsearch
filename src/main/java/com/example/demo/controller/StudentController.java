@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;  
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Student;
@@ -20,6 +21,7 @@ import com.example.demo.services.StudentServiceInterface;
 //import org.springframework.cache.annotation.Cacheable;
 
 @RestController
+@Profile("!test")  // Don't load during tests since it depends on Elasticsearch
 public class StudentController 
 {
     @Autowired
