@@ -7,7 +7,7 @@ import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import java.util.List;
 import java.util.ArrayList;
-import com.example.demo.kafka.kafkaProducer;
+import com.example.demo.kafka.KafkaProducerInterface;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,7 @@ import com.example.demo.ElasticSearch.StudentSearchRepository;
 import com.example.demo.ElasticSearch.StudentDocument;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import com.example.demo.services.StudentService;
+import com.example.demo.services.StudentServiceInterface;
 
 //import org.springframework.cache.annotation.Cacheable;
 
@@ -26,13 +26,13 @@ public class StudentController
     private StudentRepository studentRepository;
 
     @Autowired
-    private kafkaProducer kafkaProducer;
+    private KafkaProducerInterface kafkaProducer;
 
     @Autowired
     private StudentSearchRepository studentSearchRepository;
 
     @Autowired
-    private StudentService studentService;
+    private StudentServiceInterface studentService;
 
     //@Cacheable("students")
     @GetMapping("/students")

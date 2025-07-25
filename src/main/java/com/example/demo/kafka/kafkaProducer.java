@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Profile("!test")  // Don't load during tests
-public class kafkaProducer {
+public class kafkaProducer implements KafkaProducerInterface {
 
     private KafkaTemplate<String, String> kafkaTemplate;
 
@@ -15,6 +15,7 @@ public class kafkaProducer {
         System.out.println("KafkaTemplate created");
     }
 
+    @Override
     public void sendMessage(String message) {
         kafkaTemplate.send("demo_topic", message);
         System.out.println("Message sent to Kafka: " + message);

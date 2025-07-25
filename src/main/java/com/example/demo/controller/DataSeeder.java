@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Student;
@@ -9,6 +10,7 @@ import com.example.demo.repository.StudentRepository;
 import java.util.List;
 
 @Component
+@Profile("!test")  // Don't run during tests
 public class DataSeeder implements CommandLineRunner {
 
     @Autowired

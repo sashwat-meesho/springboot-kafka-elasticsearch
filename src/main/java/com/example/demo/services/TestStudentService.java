@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Profile("test")  // Test version - database only
-public class TestStudentService {
+public class TestStudentService implements StudentServiceInterface {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -20,6 +20,7 @@ public class TestStudentService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     @Transactional
     public void clearAllData() {
         System.out.println("🧹 Clearing H2 data (test mode)...");

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Profile("!test")  // Production version - uses Elasticsearch
-public class StudentService {
+public class StudentService implements StudentServiceInterface {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -24,6 +24,7 @@ public class StudentService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     @Transactional
     public void clearAllData() {
         System.out.println("🧹 Clearing H2 and Elasticsearch data...");
