@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import com.example.demo.repository.StudentRepository;
-import com.example.demo.ElasticSearch.StudentSearchRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -12,33 +11,27 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile("!test")  // Production version - uses Elasticsearch
-public class StudentService {
+@Profile("test")  // Test version - database only
+public class TestStudentService {
 
     @Autowired
     private StudentRepository studentRepository;
-
-    @Autowired
-    private StudentSearchRepository studentSearchRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
     public void clearAllData() {
-        System.out.println("🧹 Clearing H2 and Elasticsearch data...");
+        System.out.println("🧹 Clearing H2 data (test mode)...");
 
-        // 1. Clear DB
+        // 1. Clear DB only
         studentRepository.deleteAll();
 
-        // 2. Clear Elasticsearch
-        studentSearchRepository.deleteAll();
-
-        // 3. Reset H2 auto-increment ID
+        // 2. Reset H2 auto-increment ID
         entityManager
             .createNativeQuery("ALTER TABLE student ALTER COLUMN id RESTART WITH 1")
             .executeUpdate();
 
-        System.out.println("✅ Data cleared and ID reset.");
+        System.out.println("✅ Test data cleared and ID reset.");
     }
-}
+} 

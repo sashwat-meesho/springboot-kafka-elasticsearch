@@ -6,12 +6,14 @@ import com.example.demo.ElasticSearch.StudentSearchRepository;
 import com.example.demo.ElasticSearch.StudentDocument;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.context.event.EventListener;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 
 import java.util.List;
 @Service
+@Profile("!test")  // Don't run during tests
 public class StartupSyncService {
 
     @Autowired
