@@ -15,6 +15,7 @@ import com.example.demo.ElasticSearch.StudentSearchRepository;
 import com.example.demo.ElasticSearch.StudentDocument;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import com.example.demo.services.StudentService;
 
 //import org.springframework.cache.annotation.Cacheable;
 
@@ -29,6 +30,9 @@ public class StudentController
 
     @Autowired
     private StudentSearchRepository studentSearchRepository;
+
+    @Autowired
+    private StudentService studentService;
 
     //@Cacheable("students")
     @GetMapping("/students")
@@ -79,10 +83,9 @@ public class StudentController
     public List<StudentDocument> searchStudentsByAgeBetween(@RequestParam("minAge") int minAge, @RequestParam("maxAge") int maxAge) {
         return studentSearchRepository.findByAgeBetween(minAge, maxAge);
     }
-    @DeleteMapping("/students/search/clear")
-    public String clearElasticSearchIndex() {
-        System.out.println("👉 Deleting all student documents from Elasticsearch");
-        studentSearchRepository.deleteAll();
-        return "✅ All student documents deleted from Elasticsearch";
-    }
+    @DeleteMapping("/students/clear")
+    public String clearAllData() {
+        studentService.clearAllData();
+        return "🧹 H2 and Elasticsearch cleared. ID reset.";
+    }   
 }
